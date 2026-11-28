@@ -79,7 +79,10 @@ fun ShiftRoute(
             onDismissRequest = { confirmLeave = false },
             title = { Text(stringResource(R.string.shift_leave_title)) },
             text = { Text(stringResource(R.string.shift_leave_body)) },
-            confirmButton = { TextButton(onClick = onLeave) { Text(stringResource(R.string.shift_leave_confirm)) } },
+            // 대화상자를 먼저 닫아야 화면 전환 애니메이션 동안 남아 보이지 않음
+            confirmButton = {
+                TextButton(onClick = { confirmLeave = false; onLeave() }) { Text(stringResource(R.string.shift_leave_confirm)) }
+            },
             dismissButton = { TextButton(onClick = { confirmLeave = false }) { Text(stringResource(R.string.shift_leave_cancel)) } },
         )
     }
